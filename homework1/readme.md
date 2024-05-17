@@ -74,7 +74,28 @@ winningPlan: {
 Для выбора первой буквы имени используйте ключевое слово substr.
 
 ```
-db.users.aggregate([ { $match: { visits: { $gt: 300 } } }, { $group: { _id: { $substr: ["$first_name", 0, 1] }, total_karma: { $sum: "$karma" } } }] )
+db.users.aggregate([ { $match: { visits: { $gt: 300 } } }, { $group: { _id: { $substr: ["$first_name", 0, 1] }, total_karma: { $sum: "$karma" } } }, {$sort: {"_id":1}}])
+
+[
+  { _id: 'A', total_karma: -28 },
+  { _id: 'B', total_karma: 323 },
+  { _id: 'C', total_karma: 176 },
+  { _id: 'D', total_karma: -39 },
+  { _id: 'E', total_karma: 120 },
+  { _id: 'G', total_karma: 199 },
+  { _id: 'H', total_karma: 79 },
+  { _id: 'J', total_karma: 477 },
+  { _id: 'K', total_karma: 153 },
+  { _id: 'L', total_karma: 243 },
+  { _id: 'M', total_karma: 516 },
+  { _id: 'O', total_karma: 71 },
+  { _id: 'P', total_karma: 94 },
+  { _id: 'R', total_karma: 53 },
+  { _id: 'S', total_karma: 296 },
+  { _id: 'T', total_karma: -68 },
+  { _id: 'V', total_karma: -43 },
+  { _id: 'Z', total_karma: -82 }
+]
 ```
 
 
