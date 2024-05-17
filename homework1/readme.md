@@ -52,6 +52,14 @@ db.posts.insertMany([
 db.users.createIndex({ first_name: 1, last_name: 1 })
 
 db.users.find({ first_name: "Lydia", last_name: "Joly" }).explain()
+
+
+winningPlan: {
+      stage: 'FETCH',
+      inputStage: {
+        stage: 'IXSCAN',
+        keyPattern: { first_name: 1, last_name: 1 },
+        indexName: 'first_name_1_last_name_1',
 ```
 
 
