@@ -25,9 +25,9 @@ persist index
 Выведите место в рейтинге для mysql.
 
 ```
-hset ratings mysql 10 postgresql 20 mongodb 30 redis 40
-hget ratings mysql
-hincrby ratings mysql 15
+zadd ratings 10 mysql 20 postgresql 30 mongodb 40 redis
+zincrby ratings 15 mysql
+zrevrange ratings 0 0
 
 ```
 
@@ -39,6 +39,9 @@ hincrby ratings mysql 15
 Опубликуйте сообщение на канале events101 с текстом “Hello there”.
 
 ```
+psubscribe events*
+
+publish events101 "Hello there"
 ```
 
 ## Задание 4
@@ -46,4 +49,15 @@ hincrby ratings mysql 15
 Сохраните в Redis функцию, которая принимает ключ и значение и сохраняет под указанным ключом квадратный корень от значения.
 
 ```
+script load "redis.call('set', 'sqr:'..KEYS[1],KEYS[1]*KEYS[1])"
+"666736af8f339831dfdbbb14c1dfa614a2f5b2b4"
+
+ evalsha "666736af8f339831dfdbbb14c1dfa614a2f5b2b4" 1 3
+
+ get sqr:3
+ "9"
+
+evalsha "666736af8f339831dfdbbb14c1dfa614a2f5b2b4" 1 4
+get sqr:4
+"16"
 ```
